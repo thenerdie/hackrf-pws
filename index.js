@@ -26,13 +26,13 @@ fs.watch(path, async eventType => {
 
     const now = Date.now()
 
-    if ((now.valueOf() - lastGot) / 1E3 >= 300 && process.argv.owmlat && process.argv.owmlon) {
+    if ((now.valueOf() - lastGot) / 1E3 >= 300 && process.env.owmlat && process.env.owmlon) {
         try {
             const { data } = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
                 params: {
                     appid: process.env.owmappid,
-                    lat: Number.parseFloat(process.argv.owmlat),
-                    lon: Number.parseFloat(process.argv.owmlon),
+                    lat: Number.parseFloat(process.env.owmlat),
+                    lon: Number.parseFloat(process.env.owmlon),
                     units: "imperial"
                 }
             })
